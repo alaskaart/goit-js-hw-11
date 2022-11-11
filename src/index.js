@@ -14,7 +14,10 @@ loadMoreEl.addEventListener('click', onLoadMore);
 let hits = 0;
 let page = 1;
 let searchQuery = '';
-let simpleBox = 0;
+const simpleBox = new SimpleLightbox('.gallery a', {
+  captionDelay: 250,
+  captionData: 'alt',
+});
 
 async function onSearchForm(event) {
   event.preventDefault();
@@ -39,10 +42,7 @@ async function onSearchForm(event) {
       totalImg(data);
       galleryEl.innerHTML = '';
       createMarkup(data.hits);
-      simpleBox = new SimpleLightbox('.gallery a', {
-        captionDelay: 250,
-        captionData: 'alt',
-      });
+      simpleBox.refresh();
     }
 
     if (data.totalHits === 0) {
